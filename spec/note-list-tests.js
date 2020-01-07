@@ -1,16 +1,12 @@
-describe('NoteList', () => {
-  describe('.showAll', () => {
+describe('Note List', () => {
+  describe('.show', () => {
     it('Shows all the notes', () => {
       var noteList = new NoteList()
       noteList.add("This is my first note")
-      expect(noteList.showAll()[0]).isInstanceOf(Note)
+      expect(noteList.all()[0]).isInstanceOf(Note)
     })
   })
 })
-
-
-
-
 
 
 
