@@ -8,9 +8,10 @@ describe('Note Controller', () => {
   describe('.insertNoteList', () => {
     it('Inserts our note list into the app index.html file', () => {
       var noteList = new NoteList()
+      noteList.createNote('Favourite Drink: seltzer')
       var changeHTML = new ChangeHTML(noteList)
       changeHTML.insertNoteList();
-      var expectedOutput = '<ul><li><div>Favourite Drink: seltzer</div></li></ul>'
+      var expectedOutput = '<ul><li><div>Favourite Drink: sel</div></li></ul>'
       expect(document.getElementById("app").innerHTML).includes(expectedOutput)
     })
   })
