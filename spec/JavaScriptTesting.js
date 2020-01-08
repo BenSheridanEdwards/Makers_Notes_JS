@@ -39,6 +39,13 @@ const matchers = (expect) => ({
     } else {
       console.log(`%c    Failed. (expected ${expect} to be instance of ${value})`, 'color: #ff0000')
     }
+  },
+  includes: (value) => {
+    if (expect.includes(value)) {
+      console.log('%c    Passed', 'color: #00ff00')
+    } else {
+      console.log(`%c    Failed. (expected ${expect} to include ${value})`, 'color: #ff0000')
+    }
   }
 })
 
