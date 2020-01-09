@@ -46,6 +46,13 @@ const matchers = (expect) => ({
     } else {
       console.log(`%c    Failed. (expected ${expect} to include ${value})`, 'color: #ff0000')
     }
+  },
+  toBeEmpty: (value) => {
+    if (value.length == 0) {
+      console.log('%c    Passed', 'color: #00ff00')
+    } else {
+      console.log(`%c    Failed. (expected both ${expect} and ${value} to be empty)`, 'color: #ff0000')
+    }
   }
 })
 

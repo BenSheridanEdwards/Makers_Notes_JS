@@ -4,19 +4,14 @@ describe('Note Controller', () => {
     var changeHTML = new ChangeHTML(noteList)
     expect(changeHTML.noteList).isInstanceOf(NoteList)
   })
-  describe('.changeAppContent', () => {
-    it('listens for hashchanges and loads full note content based on the URL', () => {
-      var noteList = new NoteList()
-      noteList.createNote('Favourite Drink: seltzer')
-      noteList.createNote('Favourite Drink: yellow')
-      var changeHTML = new ChangeHTML(noteList)
-      changeHTML.insertNoteList();
-      changeHTML.changeAppContent();
-      window.location.href = "http://127.0.0.1:5500/spec.html#note/0"
-      expect(document.getElementById("full-note").innerText).includes("Favourite Drink: sel")
-    })
-  })
 
+  it('Instantates with a empty note list object', () => {
+    var noteList = new NoteList()
+    var changeHTML = new ChangeHTML(noteList)
+    list = changeHTML.noteList.list
+    expect(list).toBeEmpty(list)
+  })
+  
   describe('.insertNoteList', () => {
     it('Inserts our note list into the app index.html file', () => {
       var noteList = new NoteList()
@@ -59,6 +54,51 @@ describe('Note Controller', () => {
       changeHTML.insertNoteList();
       expect(document.getElementById("0").innerHTML).includes('<a href="#note/0">')
       expect(document.getElementById("1").innerHTML).includes('<a href="#note/1">')
+    })
+  })
+ 
+  // describe('.listenForUrlChange', () => {
+  //   it('listens for a url change event', () => {
+    
+  //   })
+
+  //   it('calls the changeAppContent function', () => {
+      
+  //   })
+  // })
+
+  // describe('.listenForSubmitEvent', () => {
+  //   it('listens for a form submit event', () =>{
+
+  //   })
+  //   it('calls the createNoteFromFormEvent function', () => {
+    
+  //   })
+  // })
+
+  describe('.createNoteFromFormEvent', () => {
+    it('creates a new note with the text from the submit event', () => {
+      var noteList = new NoteList()
+      var changeHTML = new ChangeHTML(noteList)
+      changeHTML.createNoteFromFormEvent('This is my event note')
+      expect(changeHTML.noteList.list[0]).isInstanceOf(Note)
+    })
+    it('refreshes the noteList, displaying the new note', () => {
+      var noteList = new NoteList()
+      var changeHTML = new ChangeHTML(noteList)
+      changeHTML.createNoteFromFormEvent('This is my event note')
+      expect(document.getElementById("app").innerHTML).includes('This is my')
+    })
+  })
+  describe('.changeAppContent', () => {
+    it('loads full note content based on the URL', () => {
+      var noteList = new NoteList()
+      noteList.createNote('Favourite Drink: seltzer')
+      noteList.createNote('Favourite Drink: yellow')
+      var changeHTML = new ChangeHTML(noteList)
+      changeHTML.insertNoteList();
+      changeHTML.changeAppContent('http://127.0.0.1:5500/spec.html#note/0');
+      expect(document.getElementById("full-note").innerText).includes("Favourite Drink: sel")
     })
   })
 })
